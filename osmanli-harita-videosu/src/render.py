@@ -609,7 +609,7 @@ class UI:
             for y0, y1 in ranges:
                 ya = max(ya, smooth((year - y0) / 1.5 + 0.5) * smooth((y1 - year) / 1.5 + 0.5))
             if name == "Konstantinopolis":
-                ya *= 1 - smooth((t - conq) / 0.4)
+                ya *= 1 - smooth((t - (conq - 0.45)) / 0.35)
             elif name == "İstanbul":
                 ya *= smooth((t - conq) / 0.4)
             is_cap = (cap == name) or (cap == "İstanbul" and name == "İstanbul")
@@ -620,8 +620,8 @@ class UI:
             x, y = self.city_screen(cam, lon, lat)
             a *= self.rect_fade(x, y, rects, 10)
             for bx, by, ba in battle_pos:
-                if abs(bx - x) < 120 and abs(by - y) < 40:
-                    a *= (1 - ba)
+                if abs(bx - x) < 140 and abs(by - y) < 44:
+                    a *= 1 - smooth(ba * 4)
             if a < 0.02:
                 continue
             xs, ys = x * s, y * s
