@@ -193,11 +193,11 @@ SCENES = [
                  dict(anchor="Urfa", date=(1920, 4, 11), marker="urfa", terr="k5", terr_dur=2.0)]),
 
     dict(id="ankara",
-         text="Heyet-i Temsiliye, Aralık'ta Ankara'ya geldi. Son Osmanlı Mebusan Meclisi "
+         text="Mustafa Kemal ve Heyet-i Temsiliye, Aralık'ta Ankara'ya geldi. Son Osmanlı Mebusan Meclisi "
               "Misak-ı Millî'yi kabul edince, İtilaf Devletleri on altı Mart bin dokuz yüz "
               "yirmide İstanbul'u resmen işgal etti.",
          cam=(31.6, 40.2, 9.0), cam_dur=2.2,
-         events=[dict(anchor="Heyet", date=(1919, 12, 27),
+         events=[dict(anchor="Mustafa Kemal", date=(1919, 12, 27),
                       arrows=[arrow([SIV, KAY, KIR, ANK], "route", 2.4)]),
                  dict(anchor="Aralık", marker="ankara19"),
                  dict(anchor="Son Osmanlı", date=(1920, 1, 28),
@@ -256,8 +256,8 @@ SCENES = [
 
     dict(id="dogu",
          text="Doğuda Kâzım Karabekir Paşa komutasındaki ordu, Sarıkamış'ı ve otuz Ekim'de "
-              "Kars'ı geri aldı. Üç Aralık'ta imzalanan Gümrü Antlaşması, Meclis'in ilk "
-              "uluslararası başarısı oldu.",
+              "Kars'ı geri aldı. Üç Aralık'ta Gümrü'de imzalanan antlaşma ise Meclis'in "
+              "uluslararası alandaki ilk başarısı oldu.",
          cam=EAST, cam_dur=2.4,
          events=[dict(anchor="Doğuda", date=(1920, 9, 28),
                       card=card("DOĞU CEPHESİ · EYLÜL–KASIM 1920", "Kars'ın Kurtuluşu",

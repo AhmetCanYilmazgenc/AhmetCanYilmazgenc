@@ -27,15 +27,17 @@ def _load_voice():
 # eSpeak'in yanlış fonemleştirdiği özel isimler için elle yazılmış fonemler
 # (ör. "İnönü" → "inœnø", "Gümrü" → "ɟømrø" çıkıyordu).
 PRON = [
-    ("İnönü", "[[ inønˈy ]]"),
+    ("İnönü", "[[ inøːnˈyː ]]"),
+    ("Gümrü'de", "[[ ɟymɾydˈe ]]"),
     ("Gümrü", "[[ ɟymɾˈy ]]"),
-    ("Urfa'ya", "[[ uɾfajˈa ]]"),
+    ("Urfa'ya", "[[ uɾfaˈja ]]"),
     ("Urfa", "[[ ˈuɾfa ]]"),
     ("Misak ı Millî'yi", "[[ misaːkɯ milliːjˈi ]]"),
-    ("Heyet i Temsiliye", "[[ hejeti temsilijˈe ]]"),
+    ("Mebusan", "[[ mebuːsˈan ]]"),
+    ("Bandırma Vapuru", "[[ bandɯɾmˈa vapuɾˈu ]]"),
 ]
-NOISE_SCALE = 0.667
-NOISE_W = 0.8
+NOISE_SCALE = 0.3
+NOISE_W = 0.5
 
 
 def tts_text(text):
