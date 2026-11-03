@@ -5,7 +5,7 @@ Türk Kurtuluş Savaşı'nın aşamalarını **animasyonlu bir harita** üzerind
 önemli olaylar hakkında bilgi kartları gösteren ve **tamamen sentezlenmiş bir ses
 bandına** (Türkçe seslendirme, müzik ve efektler) sahip bir video.
 
-**Çıktı:** [`output/kurtulus_savasi_1918_1923.mp4`](output/kurtulus_savasi_1918_1923.mp4) — 1920×1080, 30 fps, yaklaşık 3 dakika 53 saniye.
+**Çıktı:** [`output/kurtulus_savasi_1918_1923.mp4`](output/kurtulus_savasi_1918_1923.mp4) — 1920×1080, 30 fps, yaklaşık 3 dakika 51 saniye.
 
 ## Aşamalar ve olaylar
 
