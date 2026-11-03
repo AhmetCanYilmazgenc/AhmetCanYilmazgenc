@@ -8,6 +8,7 @@ import json
 import os
 import wave
 import io
+import re
 
 import numpy as np
 
@@ -23,10 +24,26 @@ def _load_voice():
                            config_path=os.path.join(d, VOICE_NAME + ".onnx.json"))
 
 
+# eSpeak'in yanlış fonemleştirdiği özel isimler için elle yazılmış fonemler
+# (ör. "İnönü" → "inœnø", "Gümrü" → "ɟømrø" çıkıyordu).
+PRON = [
+    ("İnönü", "[[ inønˈy ]]"),
+    ("Gümrü", "[[ ɟymɾˈy ]]"),
+    ("Urfa'ya", "[[ uɾfajˈa ]]"),
+    ("Urfa", "[[ ˈuɾfa ]]"),
+    ("Misak ı Millî'yi", "[[ misaːkɯ milliːjˈi ]]"),
+    ("Heyet i Temsiliye", "[[ hejeti temsilijˈe ]]"),
+]
+NOISE_SCALE = 0.667
+NOISE_W = 0.8
+
+
 def tts_text(text):
-    """Seslendirme için metni sadeleştir (tireler, tırnaklar)."""
+    """Seslendirme için metni sadeleştir (tireler, tırnaklar, özel telaffuzlar)."""
     for a, b in (("-", " "), ("\u201c", ""), ("\u201d", ""), ("!", ".")):
         text = text.replace(a, b)
+    for a, b in PRON:
+        text = re.sub(r"(?<![\w\[])" + re.escape(a) + r"(?![\w'])", b, text)
     return text
 
 
@@ -35,7 +52,7 @@ def _synth(voice, text):
     text = tts_text(text)
     buf = io.BytesIO()
     with wave.open(buf, "wb") as w:
-        voice.synthesize_wav(text, w, syn_config=SynthesisConfig(length_scale=LENGTH_SCALE))
+        voice.synthesize_wav(text, w, syn_config=SynthesisConfig(length_scale=LENGTH_SCALE, noise_scale=NOISE_SCALE, noise_w_scale=NOISE_W))
     buf.seek(0)
     with wave.open(buf, "rb") as r:
         sr = r.getframerate()
@@ -58,7 +75,7 @@ def synthesize_all(scenes, force=False):
     """Her sahne için {'wav': yol, 'dur': sn, 'anchors': {anahtar: sn}} döndürür."""
     meta_path = os.path.join(CACHE_DIR, "narration.json")
     key = json.dumps([[s["text"], [e.get("anchor") for e in s["events"]]] for s in scenes]
-                     + [LENGTH_SCALE], ensure_ascii=False)
+                     + [LENGTH_SCALE, NOISE_SCALE, NOISE_W, PRON], ensure_ascii=False)
     if not force and os.path.exists(meta_path):
         with open(meta_path) as f:
             meta = json.load(f)
