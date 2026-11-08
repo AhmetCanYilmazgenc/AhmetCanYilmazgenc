@@ -1,0 +1,50 @@
+schema: comfy-build/1
+id: null
+name: gorsel-video-studio
+description: 'Yuksek kaliteli gorsel (Qwen Image 2.1) ve video (LTX-2.5, metinden ve gorselden video) uretimi. Workflow dosyalari: workflows/'
+syncedRevision: null
+definition:
+  schema: distribution-definition/0
+  baseComfyVersion: v0.44.2
+  models:
+  # --- Gorsel: Qwen Image 2.1 (workflows/gorsel_qwen_image_2_1_t2i.json) ---
+  - type: diffusion_models
+    filename: qwen_image_2.1_int8_convrot.safetensors
+    sourceUri: https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors
+    sha256: cb74113cb03faecd79611b01fd7fd642f0aa60d6f0b95086abee214d75eaa57d
+  - type: text_encoders
+    filename: qwen3vl_8b_int8_convrot.safetensors
+    sourceUri: https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors
+  - type: text_encoders
+    filename: qwen3.5_9b_qwen_image_2.1_pe_t2i.int8_convrot.safetensors
+    sourceUri: https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3.5_9b_qwen_image_2.1_pe_t2i.int8_convrot.safetensors
+  - type: vae
+    filename: qwen_image_2.1_vae_bf16.safetensors
+    sourceUri: https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors
+    sha256: bb21f7473051e1ac368515dd3f2e15cd44d7a11748ee8823e1ddca3e4876b7c9
+  # --- Video: LTX-2.5 (workflows/video_ltx2_5_t2v.json, workflows/video_ltx2_5_i2v.json) ---
+  - type: diffusion_models
+    filename: ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors
+    sourceUri: https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors
+    sha256: c4279eeff115cbeaca494bd2183e7d768c38fe85a184dc6afbb7159157c44334
+  - type: text_encoders
+    filename: gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors
+    sourceUri: https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors
+    sha256: 6ce688a0aa98a5fa36a9f1e6c3f42152a498cc2b53ee8c15674c64244f91487f
+  - type: text_encoders
+    filename: gemma4_e2b_it_int8_convrot.safetensors
+    sourceUri: https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e2b_it_int8_convrot.safetensors
+    sha256: efeca0fcad2f863e5ed0a75e3af952b72bc963604c1dda6d20aee87a32b17566
+  - type: vae
+    filename: ltx-2.5-video-vae-bf16.safetensors
+    sourceUri: https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors
+    sha256: 847e14ca7f3355debca0cea4eaa24ac0fbcdf0061da054ac89ca638a869ddba3
+  - type: vae
+    filename: ltx-2.5-audio-vae-bf16.safetensors
+    sourceUri: https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors
+    sha256: c52733d37f6a7fb7949c3dc0fb468c6cb2169e4d836983a73babb9f0d54837a5
+  - type: latent_upscale_models
+    filename: ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors
+    sourceUri: https://huggingface.co/Lightricks/LTX-2.5/resolve/main/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors
+    sha256: eb5a71fe4068ee87ccdb1c3aa635e547ca76bd2d30ae20ae889f2c325c0677e8
+  customNodes: []
