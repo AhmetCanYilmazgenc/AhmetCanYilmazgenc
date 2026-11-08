@@ -12,15 +12,19 @@ alındı ve yalnızca çekirdek ComfyUI node'larını kullanıyor; ek paket gere
 | Dosya | Ne yapar | Model |
 | --- | --- | --- |
 | `gorsel_qwen_image_2_1_t2i.json` | Metinden görsel (1024×1024, 2K'ya kadar) | Qwen Image 2.1 (int8) |
-| `video_ltx2_5_t2v.json` | Metinden video (sesli, 2× uzamsal büyütme) | LTX-2.5 22B distilled (int8) |
-| `video_ltx2_5_i2v.json` | Görselden video (sesli) | LTX-2.5 22B distilled (int8) |
+| `video_minimax_h3_i2v.json` | Görselden video (sesli, ~15 sn'ye kadar) | MiniMax H3 (int8) + Turbo LoRA |
+
+> `video_ltx2_5_*.json` ve `api/video_ltx2_5_i2v_api.json` release v1 içindir.
+> v2'den itibaren LTX-2.5 modelleri build'den çıkarıldı; bu dosyalar yalnızca
+> v1 ile çalışır.
 
 ## Ortam
 
 - ComfyUI: `v0.44.2`
 - Ek node paketi: yok
 - `pipDependencies`: boş (paketlerin kendi gereksinimleri base image'ın torch'u ile çözülür)
-- 10 model, hepsi builder tarafından Hugging Face'ten indirilir (yerelden yükleme yok)
+- 9 model (yaklaşık 70 GB), hepsi builder tarafından Hugging Face'ten indirilir (yerelden yükleme yok)
+- Release v1: Qwen Image 2.1 + LTX-2.5 · Release v2: Qwen Image 2.1 + MiniMax H3
 
 ## Komutlar
 
