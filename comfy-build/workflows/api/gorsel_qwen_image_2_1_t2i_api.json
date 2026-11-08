@@ -1,0 +1,77 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "model": ["1", 0],
+      "device": "auto",
+      "dtype": "default"
+    }
+  },
+  "3": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "4": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+    }
+  },
+  "5": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "clip": ["3", 0],
+      "prompt": "The image is a wide cinematic photograph of Istanbul at golden hour, seen from across the Golden Horn. In the centre of the frame the Suleymaniye Mosque rises on its hill, its great grey lead-covered dome and four slender pencil minarets glowing warm amber in the low sun. Smaller domes cascade down the hillside around it, mixed with terracotta rooftops and pale stone buildings. In the lower third, the calm water of the Golden Horn reflects the orange and violet sky, with two small wooden fishing boats and a white ferry leaving soft wakes. Seagulls glide across the upper right of the sky. On the far left, a stone quay with a cast-iron lamp post frames the foreground. The sky shifts from deep gold near the horizon to soft lavender above, with thin wispy clouds lit pink from below. The lighting is warm, low, directional sunlight from the left, casting long shadows and a gentle haze over the distant hills. Shallow atmospheric depth, fine architectural detail, natural colours. The overall composition is balanced and serene, with a rich warm palette and a timeless, majestic mood.",
+      "negative_prompt": "",
+      "resolution": 1024
+    }
+  },
+  "6": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1536,
+      "height": 1024,
+      "batch_size": 1
+    }
+  },
+  "7": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": ["2", 0],
+      "positive": ["5", 0],
+      "negative": ["5", 1],
+      "latent_image": ["6", 0],
+      "seed": 447606998181262,
+      "steps": 25,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["7", 0],
+      "vae": ["4", 0]
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": ["8", 0],
+      "filename_prefix": "qwen_image_2.1"
+    }
+  }
+}
